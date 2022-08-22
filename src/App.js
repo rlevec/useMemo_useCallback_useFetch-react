@@ -18,11 +18,11 @@ const App = () => {
   const [count, setCount] = useState(0)
   const [cart, setCart] = useState(0)
 
-  const addToCart = useCallback(() => {
+  const addToCart = useCallback(() => {       //callback changes when dependency changes, trigers re-render only when dependency changes
     setCart(cart + 1)
   }, [cart])
 
-  const mostExpensive = useMemo(() => calculateMostExpensive(dataSet), [dataSet])
+  const mostExpensive = useMemo(() => calculateMostExpensive(dataSet), [dataSet])   //memoizes value and only triggers re-render and function call aka calculation when dependency changes
 
   return (
     <>
@@ -37,7 +37,7 @@ const App = () => {
   )
 }
 
-const BigList = React.memo(({ dataSet, addToCart }) => {
+const BigList = React.memo(({ dataSet, addToCart }) => {   //memoize value if props don't change so the component doesn't trigger re-render
   return (
     <section className='products'>
       {dataSet.map((product) => {
